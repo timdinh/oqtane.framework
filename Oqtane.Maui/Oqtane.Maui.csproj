@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
 
 	<PropertyGroup>
-		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
-		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
-    <!-- <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks> -->
+    <!-- <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>-->
+    <!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+    <TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
     <Version>5.0.1</Version>
@@ -75,13 +75,19 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="8.0.3" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(Configuration)'=='Debug'">
     <Reference Include="Oqtane.Client">
       <HintPath>..\Oqtane.Server\bin\Debug\net8.0\Oqtane.Client.dll</HintPath>
     </Reference>
     <Reference Include="Oqtane.Shared">
       <HintPath>..\Oqtane.Server\bin\Debug\net8.0\Oqtane.Shared.dll</HintPath>
     </Reference>
+    <Reference Include="SEAVA.Module.SeavaJob.Client.Oqtane">
+      <HintPath>../../SEAVA.Module.Jobs/Client/bin/Debug/net8.0/SEAVA.Module.SeavaJob.Client.Oqtane.dll</HintPath>
+    </Reference>
+    <Reference Include="SEAVA.Module.SeavaJob.Shared.Oqtane">
+      <HintPath>../../SEAVA.Module.Jobs/Client/bin/Debug/net8.0/SEAVA.Module.SeavaJob.Shared.Oqtane.dll</HintPath>
+    </Reference>
   </ItemGroup>
-
+  
 </Project>

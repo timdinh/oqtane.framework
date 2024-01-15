@@ -7,6 +7,7 @@ using Oqtane.Services;
 using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using SEAVA.Module.SeavaJob.Services;
 
 namespace Oqtane.Maui;
 
@@ -26,7 +27,7 @@ public static class MauiProgram
 		builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
 
-        var apiurl = LoadAppSettings(); 
+        var apiurl = LoadAppSettings();
 
         if (!string.IsNullOrEmpty(apiurl))
         {
@@ -58,6 +59,8 @@ public static class MauiProgram
             // register client startup services
             RegisterClientStartups(assembly, builder.Services);
         }
+
+        builder.Services.AddScoped<ISeavaJobService, SeavaJobService>();
 
         return builder.Build();
 	}
@@ -288,6 +291,6 @@ public static class MauiProgram
     {
         var path = new Uri(url).AbsolutePath.Substring(1);
         path = (!string.IsNullOrEmpty(path) && !path.EndsWith("/")) ? path + "/" : path;
-        return path;        
+        return path;
     }
 }
